@@ -35,18 +35,14 @@ function generateSteps(ids: number[], values: number[]): AnimationStep[] {
       });
 
       if (arrVals[j] > arrVals[j + 1]) {
-        steps.push({
-          bars: makeBars(arrIds, arrVals, new Map([[j, 'swapping'], [j + 1, 'swapping']]), sortedSet),
-          description: `${arrVals[j]} > ${arrVals[j + 1]} 이므로 교환합니다.`,
-          codeLine: 2,
-        });
-
+        // 비교 직후 바로 교환 → 막대가 슬라이딩
+        const desc = `${arrVals[j]} > ${arrVals[j + 1]} 이므로 교환합니다.`;
         [arrIds[j], arrIds[j + 1]] = [arrIds[j + 1], arrIds[j]];
         [arrVals[j], arrVals[j + 1]] = [arrVals[j + 1], arrVals[j]];
         steps.push({
           bars: makeBars(arrIds, arrVals, new Map([[j, 'swapping'], [j + 1, 'swapping']]), sortedSet),
-          description: `교환 완료: [${arrVals[j]}, ${arrVals[j + 1]}]`,
-          codeLine: 3,
+          description: desc,
+          codeLine: 2,
         });
       }
     }

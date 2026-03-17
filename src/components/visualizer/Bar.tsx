@@ -39,8 +39,8 @@ export const Bar = memo(function Bar({
         width: `${width}%`,
         maxWidth: '75px',
         height: '100%',
-        transition: 'left 300ms ease',
-        transform: offsetY ? `translateY(${offsetY}px)` : undefined,
+        transition: 'left 300ms ease, transform 300ms ease',
+        transform: `translateY(${offsetY ?? 0}px)`,
       }}
     >
       <div className="relative w-full h-full flex flex-col justify-end">
