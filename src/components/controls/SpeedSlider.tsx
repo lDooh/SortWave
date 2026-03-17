@@ -1,3 +1,5 @@
+import { EditableValue } from './EditableValue';
+
 interface SpeedSliderProps {
   speed: number;
   onChange: (speed: number) => void;
@@ -15,7 +17,7 @@ export function SpeedSlider({ speed, onChange }: SpeedSliderProps) {
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-32 accent-blue-500"
       />
-      <span className="text-xs text-gray-400 font-mono w-4">{speed}</span>
+      <EditableValue value={speed} min={1} max={10} onChange={onChange} width="w-6" />
     </div>
   );
 }

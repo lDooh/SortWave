@@ -37,6 +37,7 @@ export const Bar = memo(function Bar({
       style={{
         left: `${left}%`,
         width: `${width}%`,
+        maxWidth: '75px',
         height: '100%',
         transition: 'left 300ms ease',
         transform: offsetY ? `translateY(${offsetY}px)` : undefined,

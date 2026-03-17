@@ -1,3 +1,5 @@
+import { EditableValue } from './EditableValue';
+
 interface ArraySizeSliderProps {
   size: number;
   onChange: (size: number) => void;
@@ -11,13 +13,13 @@ export function ArraySizeSlider({ size, onChange, disabled }: ArraySizeSliderPro
       <input
         type="range"
         min={5}
-        max={100}
+        max={50}
         value={size}
         onChange={(e) => onChange(Number(e.target.value))}
         disabled={disabled}
         className="w-32 accent-blue-500 disabled:opacity-40"
       />
-      <span className="text-xs text-gray-400 font-mono w-6">{size}</span>
+      <EditableValue value={size} min={5} max={50} onChange={onChange} width="w-6" />
     </div>
   );
 }
