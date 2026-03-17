@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
-import type { AlgorithmInfo } from '../../types';
+import { useMemo, useState } from 'react';
+import type { AlgorithmInfo, Language } from '../../types';
 import { useAnimator } from '../../hooks/useAnimator';
 import { BarChart } from './BarChart';
 import { CodePanel } from '../code/CodePanel';
-import { StepDescription } from '../code/StepDescription';
+import { OptimizationTipButton } from '../code/OptimizationTipButton';
 import { ControlPanel } from '../controls/ControlPanel';
 import { SpeedSlider } from '../controls/SpeedSlider';
 import { ArraySizeSlider } from '../controls/ArraySizeSlider';
@@ -25,6 +25,7 @@ export function VisualizerPanel({
   onArraySizeChange,
   onRegenerate,
 }: VisualizerPanelProps) {
+  const [language, setLanguage] = useState<Language>('js');
   const steps = useMemo(() => algorithm.generateSteps(ids, values), [algorithm, ids, values]);
 
   const {
@@ -51,14 +52,23 @@ export function VisualizerPanel({
         </div>
       </div>
 
-      {/* 하단: 코드 + 설명 + 컨트롤 */}
+      {/* 하단: 코드 패널들 + 컨트롤 */}
       <div className="border-t border-gray-200 bg-white p-4 space-y-3">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          <CodePanel codeLines={algorithm.codeLines} currentLine={step.codeLine} />
-          <StepDescription
-            description={step.description}
-            currentStep={currentStep}
-            totalSteps={totalSteps}
+          {/* 좌측: 기본 코드 + 언어 드롭다운 */}
+          <CodePanel
+            title="Code"
+            codeBlock={algorithm.code[language]}
+            currentLogicalLine={step.codeLine}
+            language={language}
+            onLanguageChange={setLanguage}
+          />
+          {/* 우측: 최적화 코드 + 설명 팝업 버튼 */}
+          <CodePanel
+            title="Optimized"
+            codeBlock={algorithm.optimizedCode[language]}
+            currentLogicalLine={step.codeLine}
+            topRightSlot={<OptimizationTipButton tip={algorithm.optimizationTip} />}
           />
         </div>
 
