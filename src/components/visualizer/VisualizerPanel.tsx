@@ -44,10 +44,10 @@ export function VisualizerPanel({
   const step = steps[currentStep];
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden">
+    <div className="flex-1 overflow-y-auto">
       {/* 시각화 영역 */}
-      <div className="flex-1 min-h-0 p-4">
-        <div className="bg-white rounded-xl border border-gray-200 h-full shadow-sm">
+      <div className="p-4">
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm h-[400px]">
           <BarChart step={step} />
         </div>
       </div>
