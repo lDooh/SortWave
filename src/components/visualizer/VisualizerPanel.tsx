@@ -41,7 +41,7 @@ export function VisualizerPanel({
     totalSteps,
   } = useAnimator(steps);
 
-  const step = steps[currentStep];
+  const step = steps[Math.min(currentStep, steps.length - 1)];
 
   return (
     <div className="flex-1 overflow-y-auto">
